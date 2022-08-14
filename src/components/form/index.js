@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./form.scss";
-import { Switch } from '@syncfusion/ej2-buttons';
-
-
-
-
+import { Switch } from "@syncfusion/ej2-buttons";
 
 import axios from "axios";
 function Form(props) {
@@ -49,7 +45,12 @@ function Form(props) {
           <input name="url" type="text" onChange={handelchange} />
           <button type="submit">GO!</button>
         </label>
-      
+        <div className='button-2'>
+            <button id="get" >GET</button>
+            <button id="post" >POST</button>
+            <button id="put" >PUT</button>
+            <button id="delete" >DELETE</button>
+          </div>
       </form>
     </>
   );

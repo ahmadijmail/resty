@@ -1,10 +1,10 @@
 import React from "react";
-
+import './results.scss'
 function Results(props) {
   return (
     <>
       <section>
-        <pre>
+        <pre id="results">
           {props.data ? JSON.stringify(props.data, undefined, 2) : null}
         </pre>
       </section>
