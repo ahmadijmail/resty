@@ -47,3 +47,19 @@ form {
   -webkit-user-select: none;
   touch-action: manipulation;
 }
+
+#json {
+  width: 200px;
+  height: 100px;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
+
+.active{
+
+  background-color: #333333;
+}
