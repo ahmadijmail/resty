@@ -8,19 +8,21 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import Form from "./components/form";
 import Results from "./components/results";
-//import { useEffect } from "react/cjs/react.production.min";
+
 
 function App() {
-  const [data, setState] = useState(null );
-
+  const [data, setState] = useState(null);
+  const [reqest, setformData] = useState(null);
   const callApi = (data) => {
     setState(data);
+    
   };
 
   return (
     <React.Fragment>
       <Header />
-     
+      <div>Request Method: </div>
+        {/* <div>URL: {formData.url}</div> */}
       <Form handleApiCall={callApi} />
       <Results data={data} />
       <Footer />
