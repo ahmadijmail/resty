@@ -41,7 +41,7 @@ function Form(props) {
         });
       }
 
-  }, [reqest]);
+  }, [reqest,url, json]);
 
 
   useEffect(() => {
