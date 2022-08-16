@@ -12,15 +12,17 @@ import Results from "./components/results";
 
 function App() {
   const [data, setState] = useState(null);
-
+  const [reqest, setformData] = useState(null);
   const callApi = (data) => {
     setState(data);
+    
   };
 
   return (
     <React.Fragment>
       <Header />
-
+      <div>Request Method: </div>
+        {/* <div>URL: {formData.url}</div> */}
       <Form handleApiCall={callApi} />
       <Results data={data} />
       <Footer />

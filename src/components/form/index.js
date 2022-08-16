@@ -3,56 +3,45 @@ import "./form.scss";
 
 import axios from "axios";
 function Form(props) {
+  // const formData = {
+  //   method:'GET',
+  //   url: 'https://pokeapi.co/api/v2/pokemon',
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     props.handleApiCall(data);
   };
 
   const selectmethod = useRef();
-  const [apiRes, handelRes] = useState([]);
+  const [url, setUrl] = useState([]);
   const [data, handeldata] = useState([]);
   const [json, handeljjson] = useState([]);
+  const [reqest, setreqest] = useState([]);
+
 
   useEffect(() => {
+    if(reqest=="GET"){
     axios
-      .get(apiRes)
+      .get(url)
       .then((res) => {
-        handeldata(res);
+        handeldata(res.data.results);
+        console.log(res.data.results);
       })
       .catch((err) => {
         console.log(err);
-      });
-  });
+      });}else if (reqest=="POST"){
+        axios
+        .post(url, json)
+        .then((res) => {
+          console.log(res);
+          handeldata(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
 
-  // =============================
-  const handeljson = (e) => {
-    e.preventDefault();
-
-    const test1 = {
-      username: "ahmad",
-    };
-
-    axios
-      .post(apiRes, json)
-      .then((res) => {
-        console.log(res);
-        handeldata(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  function handelchange(event) {
-    handelRes(event.target.value);
-    //console.log(event.target.value);
-  }
-
-  function handelsjjson(event) {
-    handeljjson(event.target.value);
-    // console.log(event.target.value);
-  }
-
+  }, [reqest]);
 
 
   useEffect(() => {
@@ -71,25 +60,22 @@ function Form(props) {
       <form onSubmit={handleSubmit}>
         <label>
           <span>URL: </span>
-          <input name="url" type="text" onChange={handelchange} />
+          <input name="url" type="text" onChange={(e) => setUrl(e.target.value)} />
 
           <button type="submit">GO!</button>
         </label>
 
         <label>
           <span>JSON Data: </span>
-          <input id="json" name="url" type="text" onChange={handelsjjson} />
+          <input id="json" name="url" type="text" onChange={(e) => handeljjson(e.target.value)} />
         </label>
       </form>
       <div className="button-2" ref={selectmethod}>
-        <button id="get" onClick={handleSubmit}>
-          GET
-        </button>
-        <button id="post"  onClick={handeljson}>
-          POST
-        </button>
-        <button id="put">PUT</button>
-        <button id="delete">DELETE</button>
+        <button id="get" onClick={() => setreqest("GET")}> GET</button>
+     
+        <button id="post" onClick={() => setreqest("POST")}>  POST  </button>
+        <button id="put" onClick={() => setreqest("PUT")}>PUT</button>
+        <button id="delete" onClick={() => setreqest("DELETE")}>DELETE</button>
       </div>
     </>
   );
