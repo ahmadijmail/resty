@@ -2,6 +2,7 @@
 
 /* CSS */
 .button-24 {
+ position: fixed;
   background: #FF4742;
   border: 1px solid #FF4742;
   border-radius: 6px;
@@ -23,7 +24,8 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  vertical-align: middle;
+  vertical-align: left;
+  margin-left: 50%;
 }
 
 .button-24:hover,

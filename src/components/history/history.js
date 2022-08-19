@@ -1,14 +1,18 @@
 import { Button } from "@syncfusion/ej2-buttons";
 import React, { useState, useEffect, useRef, useReducer } from "react";
 import { Link } from "react-router-dom";
-import Form from "../form/index";
+
 import "./history.scss";
 
 function History() {
   const [data, handeljjson] = useState([]);
+  const [refresh, setref] = useState([5]);
 
-  function ClearHistory() {
+ 
+  const ClearHistory = (e) =>{
+    setref([e]);
     localStorage.removeItem("hist");
+
   }
   useEffect(() => {
     const data = localStorage.getItem("hist");
@@ -34,7 +38,9 @@ function History() {
         );
       })}
 
-      <button class="button-24" role="button" onClick={ClearHistory}>Clear History</button>
+      <button class="button-24" role="button" onClick={ClearHistory}>
+        Clear History
+      </button>
     </>
   );
 }
