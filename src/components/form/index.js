@@ -1,48 +1,116 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useReducer } from "react";
 import "./form.scss";
 
 import axios from "axios";
-function Form(props) {
-  // const formData = {
-  //   method:'GET',
-  //   url: 'https://pokeapi.co/api/v2/pokemon',
-  // };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    props.handleApiCall(data);
-  };
 
+function Form(props) {
   const selectmethod = useRef();
   const [url, setUrl] = useState([]);
   const [data, handeldata] = useState([]);
   const [json, handeljjson] = useState([]);
   const [reqest, setreqest] = useState([]);
 
+  const [show, setShow] = useState(false);
 
+  function setreqests(v) {
+    setreqest(v);
+  }
+
+  const initialvalue = {
+    history: [],
+  };
+
+  const reducer = (state, action) => {
+    const { type, payload } = action;
+    switch (action.type) {
+      case "ADD TO HISTORY":
+        const history = [...state.history, payload];
+        localStorage.setItem("hist", JSON.stringify(history));
+        console.log("reduce data ", history);
+        return { history: history };
+
+      case "Clear History":
+        return { history: [] };
+    }
+  };
+  const [state, dispatch] = useReducer(reducer, initialvalue);
   useEffect(() => {
-    if(reqest=="GET"){
-    axios
-      .get(url)
-      .then((res) => {
-        handeldata(res.data.results);
-        console.log(res.data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      });}else if (reqest=="POST"){
-        axios
-        .post(url, json)
+    if (reqest == "GET") {
+      axios
+        .get(url)
         .then((res) => {
-          console.log(res);
           handeldata(res);
+          setreqest([]);
+          dispatch({
+            type: "ADD TO HISTORY",
+            payload: { Method: "GET", URL: url, res: res },
+          });
+
+          console.log("GET METHOD", res);
         })
         .catch((err) => {
-          console.log(err);
+          dispatch({
+            type: "ADD TO HISTORY",
+            payload: {
+              Method: "GET",
+              URL: url,
+              res: "GET REQUEST CANNOT BE DONE",
+            },
+          });
+          handeldata({ res: "GET REQUEST CANNOT BE DONE" });
         });
-      }
+    } else if (reqest == "POST") {
+      axios
+        .post(url, json)
+        .then((res) => {
+          handeldata(res);
 
-  }, [reqest,url, json]);
+          dispatch({
+            type: "ADD TO HISTORY",
+            payload: { Method: "POST", URL: url, res: res },
+          });
 
+          console.log("POSt METHOD", res);
+        })
+        .catch((err) => {
+          dispatch({
+            type: "ADD TO HISTORY",
+            payload: {
+              Method: "POST",
+              URL: url ? url : "Null",
+              res: "PUT REQUEST CANNOT BE DONE",
+            },
+          });
+          handeldata({ res: "PUT REQUEST CANNOT BE DONE" });
+        });
+    } else if (reqest == "PUT") {
+      handeldata("PUT REQEST IS NOT SUPPORTED");
+
+      dispatch({
+        type: "ADD TO HISTORY",
+        payload: { Method: "PUT", URL: url },
+      });
+    } else if (reqest == "DELETE") {
+      handeldata("DELETE REQEST IS NOT SUPPORTED");
+
+      dispatch({
+        type: "ADD TO HISTORY",
+        payload: { Method: "DELETE", URL: url },
+      });
+
+      // console.log("PUT METHOD", res);
+    }
+  }, [reqest, url]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      method: reqest,
+      url: url,
+    };
+
+    props.handleApiCall(data, formData);
+  };
 
   useEffect(() => {
     selectmethod.current.childNodes.forEach((a) =>
@@ -60,23 +128,39 @@ function Form(props) {
       <form onSubmit={handleSubmit}>
         <label>
           <span>URL: </span>
-          <input name="url" type="text" onChange={(e) => setUrl(e.target.value)} />
-
+          <input
+            name="url"
+            type="text"
+            onChange={(e) => setUrl(e.target.value)}
+          />
           <button type="submit">GO!</button>
         </label>
-
+        <div className="button-2" ref={selectmethod}>
+          <button class="button-22" role="button"  onClick={() => setreqests("GET")}>
+            {" "}
+            GET
+          </button>
+          <button class="button-22" role="button" onClick={() => setreqests("POST")}>
+            {" "}
+            POST{" "}
+          </button>
+          <button class="button-22" role="button" onClick={() => setreqest("PUT")}>
+            PUT
+          </button>
+          <button class="button-22" role="button" onClick={() => setreqest("DELETE")}>
+            DELETE
+          </button>
+        </div>
         <label>
           <span>JSON Data: </span>
-          <input id="json" name="url" type="text" onChange={(e) => handeljjson(e.target.value)} />
+          <input
+            id="json"
+            name="url"
+            type="text"
+            onChange={(e) => handeljjson(e.target.value)}
+          />
         </label>
       </form>
-      <div className="button-2" ref={selectmethod}>
-        <button id="get" onClick={() => setreqest("GET")}> GET</button>
-     
-        <button id="post" onClick={() => setreqest("POST")}>  POST  </button>
-        <button id="put" onClick={() => setreqest("PUT")}>PUT</button>
-        <button id="delete" onClick={() => setreqest("DELETE")}>DELETE</button>
-      </div>
     </>
   );
 }
