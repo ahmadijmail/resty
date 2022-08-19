@@ -1,6 +1,6 @@
 import Form from "../form/index";
 import Results from "../results";
-
+import "./home.scss"
 
 import React, { useState, useEffect, useReducer } from "react";
 
@@ -17,11 +17,14 @@ function Home() {
 
   return (
   <>
-  <div>Request Method: {reqest.method}</div>
-      <div>URL: {reqest.url}</div>
+
+
+        <div id="mm">
+      <div >Request Method: {reqest.method}</div>
+      <div >URL: {reqest.url}</div>
+      </div>
       <Form handleApiCall={callApi} />
       <Results data={data} />
-  
   </>
   )
 }

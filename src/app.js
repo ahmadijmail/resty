@@ -22,8 +22,9 @@ function App() {
   return (
     <React.Fragment>
      
-      <Header />
+      
       <Router>
+      <Header />
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/history" element={<History />} />

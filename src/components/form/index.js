@@ -10,8 +10,6 @@ function Form(props) {
   const [json, handeljjson] = useState([]);
   const [reqest, setreqest] = useState([]);
 
-  const [show, setShow] = useState(false);
-
   function setreqests(v) {
     setreqest(v);
   }
@@ -54,10 +52,10 @@ function Form(props) {
             payload: {
               Method: "GET",
               URL: url,
-              res: "GET REQUEST CANNOT BE DONE",
+              res: "ERROR IN GET REQUEST",
             },
           });
-          handeldata({ res: "GET REQUEST CANNOT BE DONE" });
+          handeldata({ res: "ERROR IN GET REQUEST" });
         });
     } else if (reqest == "POST") {
       axios
@@ -69,8 +67,6 @@ function Form(props) {
             type: "ADD TO HISTORY",
             payload: { Method: "POST", URL: url, res: res },
           });
-
-          console.log("POSt METHOD", res);
         })
         .catch((err) => {
           dispatch({
@@ -78,20 +74,20 @@ function Form(props) {
             payload: {
               Method: "POST",
               URL: url ? url : "Null",
-              res: "PUT REQUEST CANNOT BE DONE",
+              res: "ERROR IN POST REQUEST",
             },
           });
-          handeldata({ res: "PUT REQUEST CANNOT BE DONE" });
+          handeldata({res: "ERROR IN POST REQUEST"} );
         });
     } else if (reqest == "PUT") {
-      handeldata("PUT REQEST IS NOT SUPPORTED");
+      handeldata({res: "PUT REQEST IS NOT SUPPORTED"});
 
       dispatch({
         type: "ADD TO HISTORY",
         payload: { Method: "PUT", URL: url },
       });
     } else if (reqest == "DELETE") {
-      handeldata("DELETE REQEST IS NOT SUPPORTED");
+      handeldata({res: "DELETE REQEST IS NOT SUPPORTED"});
 
       dispatch({
         type: "ADD TO HISTORY",
@@ -127,30 +123,16 @@ function Form(props) {
     <>
       <form onSubmit={handleSubmit}>
         <label>
+          
           <span>URL: </span>
           <input
             name="url"
             type="text"
             onChange={(e) => setUrl(e.target.value)}
           />
-          <button type="submit">GO!</button>
+          <button type="submit"class="button-22" >GO!</button>
         </label>
-        <div className="button-2" ref={selectmethod}>
-          <button class="button-22" role="button"  onClick={() => setreqests("GET")}>
-            {" "}
-            GET
-          </button>
-          <button class="button-22" role="button" onClick={() => setreqests("POST")}>
-            {" "}
-            POST{" "}
-          </button>
-          <button class="button-22" role="button" onClick={() => setreqest("PUT")}>
-            PUT
-          </button>
-          <button class="button-22" role="button" onClick={() => setreqest("DELETE")}>
-            DELETE
-          </button>
-        </div>
+
         <label>
           <span>JSON Data: </span>
           <input
@@ -161,6 +143,38 @@ function Form(props) {
           />
         </label>
       </form>
+      <div className="button-22" ref={selectmethod}>
+        <button
+          class="button-22"
+          role="button"
+          onClick={() => setreqests("GET")}
+        >
+          {" "}
+          GET
+        </button>
+        <button
+          class="button-22"
+          role="button"
+          onClick={() => setreqests("POST")}
+        >
+          {" "}
+          POST{" "}
+        </button>
+        <button
+          class="button-22"
+          role="button"
+          onClick={() => setreqest("PUT")}
+        >
+          PUT
+        </button>
+        <button
+          class="button-22"
+          role="button"
+          onClick={() => setreqest("DELETE")}
+        >
+          DELETE
+        </button>
+      </div>
     </>
   );
 }
