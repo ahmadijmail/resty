@@ -4,9 +4,9 @@ function Results(props) {
   return (
     <>
       <section>
-        <pre id="results">
+        <p id="results">
           {props.data ? JSON.stringify(props.data, undefined, 2) : null}
-        </pre>
+        </p>
       </section>
     </>
   );
