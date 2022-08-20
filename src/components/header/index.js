@@ -21,11 +21,11 @@ function Header() {
         <div id="resNav">
           <ul class="nav navbar-nav navbar-right" >
            
-              <Link to="/" className="button-23">Home</Link>
+              <Link to="resty/" className="button-23">Home</Link>
           
           
           
-              <Link to="/history" className="button-244">History</Link>
+              <Link to="resty/history" className="button-244">History</Link>
            
           </ul>
         </div>
