@@ -42,7 +42,7 @@ form {
   font-family: "RM Neue",sans-serif;
   font-size: 100%;
   line-height: 1.15;
-  margin: 0;
+  margin: auto;
   padding: 10px 21px;
   text-align: center;
   text-transform: none;
@@ -50,6 +50,7 @@ form {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+   margin-top: -0%;
 }
 
 
@@ -120,7 +121,7 @@ h1, h2, h3 {
   --size-bezel: .5rem;
   background: var(--color-background);
   padding: calc(4 * var(--size-bezel));
-  margin-top: -5cm;
+  margin-top: -100px;
   border-radius: var(--size-radius);
   border: 3px solid var(--color-shadow, currentColor);
   box-shadow: .5rem .5rem 0 var(--color-shadow, currentColor);
