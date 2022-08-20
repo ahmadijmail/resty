@@ -17,8 +17,8 @@ function App() {
       <Router>
       <Header />
         <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/history" element={<History />} />
+        <Route path="resty/" element={<Home />} />
+        <Route path="resty/history" element={<History />} />
         </Routes>
       </Router>
       <Footer />
