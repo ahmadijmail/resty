@@ -10,8 +10,8 @@ function Form(props) {
   const [json, handeljjson] = useState([]);
   const [reqest, setreqest] = useState([]);
 
-  function setreqests(v) {
-    setreqest(v);
+  function setreqests(e) {
+    setreqest(e);
   }
 
   const initialvalue = {
@@ -26,19 +26,26 @@ function Form(props) {
         localStorage.setItem("hist", JSON.stringify(history));
         console.log("reduce data ", history);
         return { history: history };
-
-      case "Clear History":
-        return { history: [] };
     }
   };
   const [state, dispatch] = useReducer(reducer, initialvalue);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      method: reqest,
+      url: url,
+    };
+    
+    props.handleApiCall(data, formData);
+  };
   useEffect(() => {
     if (reqest == "GET") {
       axios
         .get(url)
         .then((res) => {
           handeldata(res);
-          setreqest([]);
+
           dispatch({
             type: "ADD TO HISTORY",
             payload: { Method: "GET", URL: url, res: res },
@@ -77,37 +84,25 @@ function Form(props) {
               res: "ERROR IN POST REQUEST",
             },
           });
-          handeldata({res: "ERROR IN POST REQUEST"} );
+          handeldata({ res: "ERROR IN POST REQUEST" });
         });
     } else if (reqest == "PUT") {
-      handeldata({res: "PUT REQEST IS NOT SUPPORTED"});
+      handeldata({ res: "PUT REQEST IS NOT SUPPORTED" });
 
       dispatch({
         type: "ADD TO HISTORY",
         payload: { Method: "PUT", URL: url },
       });
     } else if (reqest == "DELETE") {
-      handeldata({res: "DELETE REQEST IS NOT SUPPORTED"});
+      handeldata({ res: "DELETE REQEST IS NOT SUPPORTED" });
 
       dispatch({
         type: "ADD TO HISTORY",
         payload: { Method: "DELETE", URL: url },
       });
 
-      // console.log("PUT METHOD", res);
     }
-  }, [reqest, url]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = {
-      method: reqest,
-      url: url,
-    };
-
-    props.handleApiCall(data, formData);
-  };
-
+  }, [reqest]);
   useEffect(() => {
     selectmethod.current.childNodes.forEach((a) =>
       a.addEventListener("click", saveData)
@@ -123,25 +118,32 @@ function Form(props) {
     <>
       <form onSubmit={handleSubmit}>
         <label>
-          
-          <span>URL: </span>
+          <div class="card">
+            <h2>URL</h2>
+            <label class="input">
+              <input   name="url" class="input__field" type="text" onChange={(e) => setUrl(e.target.value)}/>
+              <span class="input__label" >Enter Your UR</span>
+            </label>
+            <div>
+              <button type="submit" class="button-22">
+                Send
+              </button>
+
+            </div>
+            <label class="input">
+              <input   class="input__field" type="text" onChange={(e) => handeljjson(e.target.value)}/>
+              <span class="input__label" >Enter Your JSON</span>
+            </label>
+          </div>
+          {/* <span>URL: </span>
           <input
             name="url"
             type="text"
             onChange={(e) => setUrl(e.target.value)}
           />
-          <button type="submit"class="button-22" >GO!</button>
+          <button type="submit"class="button-22" >GO!</button> */}
         </label>
 
-        <label>
-          <span>JSON Data: </span>
-          <input
-            id="json"
-            name="url"
-            type="text"
-            onChange={(e) => handeljjson(e.target.value)}
-          />
-        </label>
       </form>
       <div className="button-22" ref={selectmethod}>
         <button

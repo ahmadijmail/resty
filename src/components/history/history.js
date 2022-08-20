@@ -9,8 +9,8 @@ function History() {
   const [refresh, setref] = useState([5]);
 
  
-  const ClearHistory = (e) =>{
-    setref([e]);
+  const ClearHistory = () =>{
+    handeljjson([]);
     localStorage.removeItem("hist");
 
   }
@@ -37,7 +37,6 @@ function History() {
           </>
         );
       })}
-
       <button class="button-24" role="button" onClick={ClearHistory}>
         Clear History
       </button>
