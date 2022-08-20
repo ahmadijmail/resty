@@ -10,6 +10,11 @@ function Form(props) {
   const [json, handeljjson] = useState([]);
   const [reqest, setreqest] = useState([]);
 
+
+const inputJs= document.querySelector("#ss1")
+
+
+
   function setreqests(e) {
     setreqest(e);
   }
@@ -122,17 +127,17 @@ function Form(props) {
             <h2>URL</h2>
             <label class="input">
               <input   name="url" class="input__field" type="text" onChange={(e) => setUrl(e.target.value)}/>
-              <span class="input__label" >Enter Your UR</span>
+              <span class="input__label" >URL</span>
             </label>
             <div>
-              <button type="submit" class="button-22">
+              <button id="ss1" type="submit" class="button-22">
                 Send
               </button>
 
             </div>
-            <label class="input">
-              <input   class="input__field" type="text" onChange={(e) => handeljjson(e.target.value)}/>
-              <span class="input__label" >Enter Your JSON</span>
+            <label  class="input" >
+              <input id="ssjs"  class="input__field" type="text" onChange={(e) => handeljjson(e.target.value)}/>
+              <span class="input__label" >JSON Data</span>
             </label>
           </div>
           {/* <span>URL: </span>

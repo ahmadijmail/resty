@@ -1,7 +1,7 @@
 /* Navigation Bar */
 .navbar{
     padding: 20px 10px 20px 0px;
-    background-color: #28a7e9;
+    background-color: #46ACC2;
     transition: all ease 0.4s;
   }
   .navbar-brand{
@@ -25,4 +25,85 @@
     margin-top: 110px;
   }
 
-  
+  #name{
+
+    font-size: xx-large;
+  }
+
+  .button-23 {
+ 
+ 
+  text-Decoration: none;
+   background-color: #58d4f0;
+   border-radius: 100px;
+   border-style: none;
+   box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+   box-sizing: border-box;
+   color: #fff;
+   cursor: pointer;
+   display:inline-block ;
+   flex-direction: row;
+   flex-shrink: 0;
+   font-family: "RM Neue",sans-serif;
+   font-size: 150%;
+   line-height: 1.15;
+   margin: 100;
+   padding: 10px 21px;
+   text-align: center;
+   text-transform: none;
+   transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+   user-select: none;
+   -webkit-user-select: none;
+   touch-action: manipulation;
+   width: 200px;
+   margin-left: 90px;
+ }
+ 
+ 
+ .button-23:active {
+   background-color:  #46ACC2;
+ }
+ 
+ .button-23:hover {
+   background-color:  #46ACC2;
+ }
+ 
+
+ .button-244 {
+ 
+  text-Decoration: none;
+  appearance: button;
+ background-color: #58d4f0;
+ border-radius: 100px;
+ border-style: none;
+ box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+ box-sizing: border-box;
+ color: #fff;
+ cursor: pointer;
+ display:inline-block ;
+ flex-direction: row;
+ flex-shrink: 0;
+ font-family: "RM Neue",sans-serif;
+ font-size: 150%;
+ line-height: 1.15;
+ margin: 100;
+ padding: 10px 21px;
+ text-align: center;
+ text-transform: none;
+ transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ width: 200px;
+ margin-left: 45px;
+ 
+}
+
+
+.button-244:active {
+ background-color:  #46ACC2;
+}
+
+.button-244:hover {
+ background-color:  #46ACC2;
+}

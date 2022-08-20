@@ -85,32 +85,7 @@ form {
 
 
 
-/* CSS */
-// .button-22 {
- 
-//   appearance: button;
-//   background-color: #0276FF;
-//   border-radius: 8px;
-//   border-style: none;
-//   box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
-//   box-sizing: border-box;
-//   color: #fff;
-//   cursor: pointer;
-//   display:inline-block ;
-//   flex-direction: row;
-//   flex-shrink: 0;
-//   font-family: "RM Neue",sans-serif;
-//   font-size: 100%;
-//   line-height: 1.15;
-//   margin: 0;
-//   padding: 10px 21px;
-//   text-align: center;
-//   text-transform: none;
-//   transition: color .13s ease-in-out,background .13s ease-in-out,opacity .13s ease-in-out,box-shadow .13s ease-in-out;
-//   user-select: none;
-//   -webkit-user-select: none;
-//   touch-action: manipulation;
-// ===
+
 
 @import url('https://rsms.me/inter/inter.css');
 
@@ -123,7 +98,7 @@ form {
   --color-text: var(--color-dark);
   --color-accent: var(--color-signal);
   
-  --size-bezel: .5rem;
+  
   --size-radius: 4px;
   
   line-height: 1.4;
@@ -142,14 +117,14 @@ h1, h2, h3 {
 
 
 .card {
-  
+  --size-bezel: .5rem;
   background: var(--color-background);
   padding: calc(4 * var(--size-bezel));
-  margin-top: calc(4 * var(--size-bezel));
+  margin-top: -5cm;
   border-radius: var(--size-radius);
   border: 3px solid var(--color-shadow, currentColor);
   box-shadow: .5rem .5rem 0 var(--color-shadow, currentColor);
- margin-left: 10%;
+ margin-left: 10px;
   &--inverted {
     --color-background: var(--color-dark);
     color: var(--color-light);
