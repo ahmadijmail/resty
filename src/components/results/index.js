@@ -1,12 +1,15 @@
 import React from "react";
 import './results.scss'
 function Results(props) {
+
+  
   return (
     <>
+
       <section>
-        <p id="results">
-          {props.data ? JSON.stringify(props.data, undefined, 2) : null}
-        </p>
+
+          {!props.data ? <p> </p>:<p id="results">{JSON.stringify(props.data)} </p>}
+       
       </section>
     </>
   );

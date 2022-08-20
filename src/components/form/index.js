@@ -11,10 +11,6 @@ function Form(props) {
   const [reqest, setreqest] = useState([]);
 
 
-const inputJs= document.querySelector("#ss1")
-
-
-
   function setreqests(e) {
     setreqest(e);
   }
