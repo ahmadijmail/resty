@@ -9,10 +9,11 @@ function Form(props) {
   const [data, handeldata] = useState([]);
   const [json, handeljjson] = useState([]);
   const [reqest, setreqest] = useState([]);
-
+  const [value1, setrandom] = useState([]);
 
   function setreqests(e) {
     setreqest(e);
+    
   }
 
   const initialvalue = {
@@ -23,8 +24,10 @@ function Form(props) {
     const { type, payload } = action;
     switch (action.type) {
       case "ADD TO HISTORY":
-        const history = [...state.history, payload];
-        localStorage.setItem("hist", JSON.stringify(history));
+        const history = [payload];
+        localStorage.setItem(value1, JSON.stringify(history));
+
+       
         console.log("reduce data ", history);
         return { history: history };
     }
@@ -42,6 +45,7 @@ function Form(props) {
   };
   useEffect(() => {
     if (reqest == "GET") {
+      setrandom(Math.random());
       axios
         .get(url)
         .then((res) => {
@@ -66,6 +70,7 @@ function Form(props) {
           handeldata({ res: "ERROR IN GET REQUEST" });
         });
     } else if (reqest == "POST") {
+      setrandom(Math.random());
       axios
         .post(url, json)
         .then((res) => {
@@ -88,22 +93,24 @@ function Form(props) {
           handeldata({ res: "ERROR IN POST REQUEST" });
         });
     } else if (reqest == "PUT") {
+      setrandom(Math.random());
       handeldata({ res: "PUT REQEST IS NOT SUPPORTED" });
 
       dispatch({
         type: "ADD TO HISTORY",
-        payload: { Method: "PUT", URL: url },
+        payload: { Method: "PUT", res: "PUT REQEST IS NOT SUPPORTED" },
       });
     } else if (reqest == "DELETE") {
+      setrandom(Math.random());
       handeldata({ res: "DELETE REQEST IS NOT SUPPORTED" });
 
       dispatch({
         type: "ADD TO HISTORY",
-        payload: { Method: "DELETE", URL: url },
+        payload: { Method: "DELETE", res: "DELETE REQEST IS NOT SUPPORTED" },
       });
-
     }
   }, [reqest]);
+
   useEffect(() => {
     selectmethod.current.childNodes.forEach((a) =>
       a.addEventListener("click", saveData)
@@ -122,18 +129,27 @@ function Form(props) {
           <div class="card">
             <h2>URL</h2>
             <label class="input">
-              <input   name="url" class="input__field" type="text" onChange={(e) => setUrl(e.target.value)}/>
-              <span class="input__label" >URL</span>
+              <input
+                name="url"
+                class="input__field"
+                type="text"
+                onChange={(e) => setUrl(e.target.value)}
+              />
+              <span class="input__label">URL</span>
             </label>
             <div>
               <button id="ss1" type="submit" class="button-22">
                 Send
               </button>
-
             </div>
-            <label  class="input" >
-              <input id="ssjs"  class="input__field" type="text" onChange={(e) => handeljjson(e.target.value)}/>
-              <span class="input__label" >JSON Data</span>
+            <label class="input">
+              <input
+                id="ssjs"
+                class="input__field"
+                type="text"
+                onChange={(e) => handeljjson(e.target.value)}
+              />
+              <span class="input__label">JSON Data</span>
             </label>
           </div>
           {/* <span>URL: </span>
@@ -144,7 +160,6 @@ function Form(props) {
           />
           <button type="submit"class="button-22" >GO!</button> */}
         </label>
-
       </form>
       <div className="button-22" ref={selectmethod}>
         <button
@@ -166,14 +181,14 @@ function Form(props) {
         <button
           class="button-22"
           role="button"
-          onClick={() => setreqest("PUT")}
+          onClick={() => setreqests("PUT")}
         >
           PUT
         </button>
         <button
           class="button-22"
           role="button"
-          onClick={() => setreqest("DELETE")}
+          onClick={() => setreqests("DELETE")}
         >
           DELETE
         </button>

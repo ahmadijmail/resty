@@ -8,21 +8,27 @@ function History() {
   const [data, handeljjson] = useState([]);
   const [refresh, setref] = useState([5]);
 
- 
-  const ClearHistory = () =>{
+  const ClearHistory = () => {
     handeljjson([]);
-    localStorage.removeItem("hist");
 
-  }
+    let keys = Object.keys(localStorage);
+
+    let i = keys.length;
+    for (let b = 0; b < i; b++) {
+      localStorage.removeItem(keys[b]);
+    }
+  };
   useEffect(() => {
-    const data = localStorage.getItem("hist");
+    let data2 = [];
+    let keys = Object.keys(localStorage);
+    let handeled = [];
 
-    if (data) {
-      const handeled = JSON.parse(data);
+    let i = keys.length;
+    for (let b = 0; b < i; b++) {
+      data2.push(localStorage.getItem(keys[b]));
+      handeled.push(JSON.parse(data2[b]));
       handeljjson(handeled);
     }
-
-    console.log(data, "here we are");
   }, []);
 
   return (
@@ -30,10 +36,16 @@ function History() {
       {data.map((datas) => {
         return (
           <>
-            {console.log(datas.res)}
-            <li> {datas.Method}</li>
-            <li> {datas.URL}</li>
-            <li> {JSON.stringify(datas.res)}</li>
+            {datas.map((hey) => {
+              return (
+                <div class="cardhistory">
+                
+                  <li>Method: {hey.Method}</li>
+                  <li>URL: {hey.URL}</li>
+                  <li>Response: {JSON.stringify(hey.res)}</li>
+                </div>
+              );
+            })}
           </>
         );
       })}
